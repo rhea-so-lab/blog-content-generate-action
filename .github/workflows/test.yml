@@ -12,4 +12,8 @@ jobs:
         with:
           open_ai_api_key: ${{ secrets.OPEN_AI_API_KEY }}
           title: 'Lodash 사용법'
-      - run: echo ${{ steps.blog_content.outputs.body }}
+      - run: |
+          cat <<EOT >> test.txt
+          ${{ steps.blog_content.outputs.body }}
+          EOT
+      - run: cat test.txt
