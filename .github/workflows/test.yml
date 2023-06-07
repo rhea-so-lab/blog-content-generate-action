@@ -18,6 +18,6 @@ jobs:
           open_ai_api_key: ${{ secrets.OPEN_AI_API_KEY }}
           title: ${{ github.event.inputs.title }}
       - run: |
-          cat <<EOT >> test.txt
+          cat > test.txt <<EOL
           ${{ steps.blog_content.outputs.body }}
-          EOT
+          EOL
