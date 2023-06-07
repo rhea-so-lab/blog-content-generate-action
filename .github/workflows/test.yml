@@ -17,7 +17,8 @@ jobs:
         with:
           open_ai_api_key: ${{ secrets.OPEN_AI_API_KEY }}
           title: ${{ github.event.inputs.title }}
-      - run: |
-          cat > test.txt <<EOL
-          ${{ steps.blog_content.outputs.body }}
-          EOL
+      - uses: DamianReeves/write-file-action@master
+        with:
+          path: test.txt
+          contents: ${{ steps.blog_content.outputs.body }}
+      - run: cat test.txt
