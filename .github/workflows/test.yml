@@ -1,0 +1,15 @@
+name: Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - uses: rhea-so-lab/blog-content-generate-action@main
+        id: blog_content
+        with:
+          open_ai_api_key: ${{ secrets.OPEN_AI_API_KEY }}
+          title: 'Lodash 사용법'
+      - run: echo ${{ steps.blog_content.outputs.body }}
