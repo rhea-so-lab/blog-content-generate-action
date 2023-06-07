@@ -2,6 +2,11 @@ name: Test
 
 on:
   workflow_dispatch:
+    inputs:
+      title:
+        default: "Docker Usage"
+        required: true
+        type: string
 
 jobs:
   test:
@@ -11,9 +16,8 @@ jobs:
         id: blog_content
         with:
           open_ai_api_key: ${{ secrets.OPEN_AI_API_KEY }}
-          title: 'Lodash 사용법'
+          title: ${{ github.event.inputs.title }}
       - run: |
           cat <<EOT >> test.txt
           ${{ steps.blog_content.outputs.body }}
           EOT
-      - run: cat test.txt
